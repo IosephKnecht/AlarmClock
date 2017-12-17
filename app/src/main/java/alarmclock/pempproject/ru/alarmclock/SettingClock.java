@@ -50,9 +50,6 @@ public class SettingClock extends AppCompatActivity {
                 String minute_string = String.valueOf(minute);
 
                 singleAlarm.setHour_string(hour_string);
-                singleAlarm.setMinute_string(minute_string);
-
-                daoSession.insert(singleAlarm);
 
                 if (hour > 12) {
                     hour_string = String.valueOf(hour - 12);
@@ -62,13 +59,17 @@ public class SettingClock extends AppCompatActivity {
                     minute_string = "0" + String.valueOf(minute);
                 }
 
+                singleAlarm.setMinute_string(minute_string);
+                daoSession.insert(singleAlarm);
+
                 Toast.makeText(SettingClock.this, "Clock start" + hour_string + minute_string, Toast.LENGTH_LONG).show();
 
                 pendingIntent = PendingIntent.getBroadcast(SettingClock.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
+                intent.putExtra("PI",pendingIntent);
                 startActivity(new Intent(SettingClock.this,MainActivity.class));
+
             }
         });
     }

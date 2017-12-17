@@ -1,5 +1,6 @@
 package alarmclock.pempproject.ru.alarmclock;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +17,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //Log.d("MyLog","Wake up..!");
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        Ringtone ringtone = RingtoneManager.getRingtone(context.getApplicationContext(), notification);
-        ringtone.play();
+        Intent _intent=new Intent(context.getApplicationContext(),WakeUp.class);
+        _intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.getApplicationContext().startActivity(_intent);
     }
 }

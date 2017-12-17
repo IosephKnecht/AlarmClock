@@ -39,26 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Query<SingleAlarm> singleAlarmQuery = singleAlarmDao.queryBuilder().orderAsc(SingleAlarmDao.Properties.Hour_string,
                 SingleAlarmDao.Properties.Minute_string).build();
 
-        Paint(singleAlarmQuery.list());
+       if(singleAlarmQuery.list()!=null) Paint(singleAlarmQuery.list());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void Paint(List<SingleAlarm> singleAlarmList){
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
