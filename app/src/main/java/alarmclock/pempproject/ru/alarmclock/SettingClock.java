@@ -64,9 +64,12 @@ public class SettingClock extends AppCompatActivity {
 
                 Toast.makeText(SettingClock.this, "Clock start" + hour_string + minute_string, Toast.LENGTH_LONG).show();
 
-                pendingIntent = PendingIntent.getBroadcast(SettingClock.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                final int _id = (int) System.currentTimeMillis();
+
+                pendingIntent = PendingIntent.getBroadcast(SettingClock.this, _id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
                 intent.putExtra("PI",pendingIntent);
                 startActivity(new Intent(SettingClock.this,MainActivity.class));
 
